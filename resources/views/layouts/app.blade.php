@@ -9,68 +9,91 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #1e2a1f;
-            --card-bg: #2c3a2b;
             --accent-gold: #d4af37;
-            --tea-brown: #8b5a2b;
-            --text-light: #f0ede8;
-            --border-rustic: 12px;
+            --text-light: #ffffff;
+            --glass-bg: rgba(30, 30, 30, 0.7);
+            --card-bg: rgba(44, 58, 43, 0.85);
+            --footer-bg: rgba(15, 26, 16, 0.9);
         }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background: var(--bg-dark);
-            background-image: radial-gradient(circle at 10% 20%, rgba(139,90,43,0.1) 2%, transparent 2.5%);
-            background-size: 30px 30px;
+            position: relative;
+            background: url('/images/bg.jpg') no-repeat center center fixed;
+            background-size: cover;
             font-family: 'Roboto', sans-serif;
             color: var(--text-light);
-            display: flex;
-            flex-direction: column;
             min-height: 100vh;
         }
-        h1, h2, h3, h4, .brand {
-            font-family: 'Playfair Display', serif;
-            letter-spacing: 2px;
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            z-index: -1;
         }
-        .navbar-custom {
-            background: #1a2a1b;
-            border-bottom: 2px solid var(--accent-gold);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+
+        #app {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
-        .navbar-custom .navbar-brand {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--accent-gold) !important;
+
+        main {
+            flex: 1 0 auto;
+            padding: 20px 0;
         }
-        .navbar-custom .nav-link {
-            color: #ddd !important;
-            font-weight: 500;
-            margin: 0 5px;
+
+        /* Стеклянный блок для основного контента */
+        .glass-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(4px);
+            border-radius: 32px;
+            padding: 20px;
+            margin: 20px auto;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
         }
-        .navbar-custom .nav-link:hover {
-            color: var(--accent-gold) !important;
-        }
+
+        /* Карточки товаров (уже полупрозрачные) */
         .card-tea {
             background: var(--card-bg);
+            backdrop-filter: blur(2px);
             border: 1px solid rgba(212,175,55,0.3);
-            border-radius: var(--border-rustic);
-            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 24px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            transition: all 0.2s ease;
             color: var(--text-light);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
+
         .card-tea:hover {
-            transform: translateY(-8px);
+            transform: translateY(-5px);
             border-color: var(--accent-gold);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.4);
         }
+
         .card-tea .card-title {
             color: var(--accent-gold);
+            font-family: 'Playfair Display', serif;
             font-weight: bold;
         }
-        .card-tea .btn-tea {
-            background-color: var(--accent-gold);
-            border: none;
-            color: #1e2a1f;
-            font-weight: bold;
+
+        .card-tea img {
+            border-radius: 24px 24px 0 0;
+            object-fit: cover;
+            height: 180px;
         }
+
         .btn-tea {
             background-color: var(--accent-gold);
             border: none;
@@ -78,85 +101,140 @@
             font-weight: bold;
             padding: 6px 16px;
             border-radius: 30px;
+            transition: 0.2s;
         }
-        .btn-tea-outline {
-            background: transparent;
-            border: 1px solid var(--accent-gold);
-            color: var(--accent-gold);
-        }
-        .btn-tea-outline:hover {
-            background: var(--accent-gold);
+
+        .btn-tea:hover {
+            background-color: #c6a43b;
             color: #1e2a1f;
+            transform: scale(1.02);
         }
-        .hero {
-            background: linear-gradient(135deg, #1e2a1f 0%, #2c3a2b 100%);
-            padding: 3rem 0;
-            border-radius: 0 0 40px 40px;
-            margin-bottom: 2rem;
-            border-bottom: 2px solid var(--accent-gold);
-            text-align: center;
-        }
-        .hero h1 {
-            font-size: 3.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-        .footer {
-            background: #0f1a10;
-            color: #aaa;
-            text-align: center;
-            padding: 1rem;
-            margin-top: 3rem;
-            border-top: 1px solid var(--accent-gold);
-            font-size: 0.9rem;
-        }
+
+        /* Таблицы с прозрачностью */
         .table-custom {
-            background: #2c3a2b;
-            color: #eee;
-            border-radius: 12px;
+            background: rgba(44, 58, 43, 0.9);
+            border-radius: 16px;
             overflow: hidden;
-        }
-        .table-custom th {
-            background: #1e2a1f;
-            color: var(--accent-gold);
-            border-bottom: 2px solid var(--accent-gold);
-        }
-        .alert {
-            background-color: #2c3a2b;
-            color: var(--accent-gold);
-            border-left: 5px solid var(--accent-gold);
-        }
-        a {
-            color: var(--accent-gold);
-        }
-        a:hover {
-            color: #ffd966;
-        }
-        input, textarea, select {
-            background: #3a4a38;
-            border: 1px solid #5a6b58;
             color: #fff;
         }
+
+        .table-custom th {
+            background-color: #1e2a1f;
+            color: var(--accent-gold);
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .table-custom td, .table-custom th {
+            padding: 12px;
+            vertical-align: middle;
+        }
+
+        /* Формы */
+        input, textarea, select {
+            background: rgba(58, 74, 56, 0.8);
+            border: 1px solid #5a6b58;
+            color: #fff;
+            border-radius: 8px;
+            padding: 6px 12px;
+        }
+
         input:focus, textarea:focus {
             background: #4a5e48;
             color: #fff;
+            outline: none;
+            border-color: var(--accent-gold);
+        }
+
+        /* Пагинация */
+        .pagination .page-link {
+            background: #2c3a2b;
+            color: var(--accent-gold);
+            border-color: #5a6b58;
+        }
+        .pagination .page-item.active .page-link {
+            background: var(--accent-gold);
+            color: #1e2a1f;
+            border-color: var(--accent-gold);
+        }
+
+        /* Навигация (хедер) – светлая для контраста */
+        .navbar-custom {
+            background: rgba(30, 42, 31, 0.95);
+            backdrop-filter: blur(4px);
+            border-bottom: 2px solid var(--accent-gold);
+        }
+        .navbar-custom .navbar-brand,
+        .navbar-custom .nav-link {
+            color: white !important;
+            font-weight: 500;
+        }
+        .navbar-custom .nav-link:hover {
+            color: var(--accent-gold) !important;
+        }
+        .navbar-custom .dropdown-menu {
+            background-color: #1e2a1f;
+        }
+        .navbar-custom .dropdown-item {
+            color: white;
+        }
+        .navbar-custom .dropdown-item:hover {
+            background-color: var(--accent-gold);
+            color: #1e2a1f;
+        }
+
+        .footer {
+            background: var(--footer-bg);
+            backdrop-filter: blur(4px);
+            text-align: center;
+            padding: 1rem;
+            border-top: 1px solid var(--accent-gold);
+            font-size: 0.9rem;
+        }
+
+        /* Утилиты */
+        .container {
+            max-width: 1200px;
+        }
+        .py-4 {
+            padding-top: 1rem !important;
+            padding-bottom: 1rem !important;
         }
     </style>
 </head>
 <body>
-    <div id="app">
-        @include('layouts.navigation')
+<div id="app">
+    @include('layouts.navigation')
 
-        <main>
-            @yield('content')
-        </main>
+    <main>
+        <div class="container">
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
 
-        <footer class="footer">
-            <div class="container">
-                🍃 Чайная лавка · Вкус традиций © {{ date('Y') }}
+            @if(session('error'))
+                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    {{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
+            <!-- Полупрозрачный блок для основного контента -->
+            <div class="glass-container">
+                @yield('content')
             </div>
-        </footer>
-    </div>
+        </div>
+    </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <footer class="footer">
+        <div class="container">
+            🍃 Чайная лавка · Вкус традиций © {{ date('Y') }}
+        </div>
+    </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

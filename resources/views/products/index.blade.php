@@ -19,7 +19,7 @@
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">{{ $product->name }}</h5>
                         <p class="card-text small">{{ Str::limit($product->description, 80) }}</p>
-                        <p class="mt-auto"><strong>{{ number_format($product->price, 2) }} ₽ / 100 г</strong></p>
+                        <p class="mt-auto"><strong>{{ number_format($product->price, 2) }} byn / 100 г</strong></p>
                         <a href="{{ route('products.show', $product) }}" class="btn btn-tea mt-2">Подробнее</a>
                     </div>
                 </div>

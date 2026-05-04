@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Вход - Чайная лавка</title>
+    <title>Чайная лавка</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -12,7 +12,9 @@
             --accent-gold: #d4af37;
             --text-light: #ffffff;
             --glass-bg: rgba(30, 30, 30, 0.7);
+            --card-bg: rgba(44, 58, 43, 0.85);
         }
+
         body {
             position: relative;
             background: url('/images/bg.jpg') no-repeat center center fixed;
@@ -23,8 +25,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0;
         }
+
         body::before {
             content: "";
             position: fixed;
@@ -36,6 +38,7 @@
             backdrop-filter: blur(8px);
             z-index: -1;
         }
+
         .glass-card {
             background: var(--glass-bg);
             backdrop-filter: blur(4px);
@@ -43,16 +46,17 @@
             padding: 2rem;
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
             border: 1px solid rgba(255,255,255,0.2);
-            max-width: 480px;
-            width: 90%;
+            max-width: 500px;
+            width: 100%;
             margin: 20px;
         }
+
         .btn-tea {
             background-color: var(--accent-gold);
             border: none;
             color: #1e2a1f;
             font-weight: bold;
-            padding: 8px 24px;
+            padding: 8px 20px;
             border-radius: 30px;
             transition: 0.2s;
         }
@@ -60,14 +64,15 @@
             background-color: #c6a43b;
             transform: scale(1.02);
         }
+
         a {
             color: var(--accent-gold);
             text-decoration: none;
         }
         a:hover {
             color: #ffd966;
-            text-decoration: underline;
         }
+
         input, select, textarea {
             background: rgba(58, 74, 56, 0.8);
             border: 1px solid #5a6b58;
@@ -84,64 +89,21 @@
         label {
             font-weight: 500;
             margin-bottom: 5px;
-            display: block;
         }
-        .form-check-input {
-            width: auto;
-            margin-right: 8px;
-        }
-        .text-danger {
-            color: #ffa69e !important;
-        }
-        h2 {
+        .alert {
+            background-color: rgba(30,30,30,0.9);
             color: var(--accent-gold);
-            font-family: 'Playfair Display', serif;
+            border-left: 5px solid var(--accent-gold);
+        }
+        .text-sm {
+            font-size: 0.875rem;
         }
     </style>
 </head>
 <body>
     <div class="glass-card">
-        <h2 class="text-center mb-4">🍃 Вход в чайную лавку</h2>
-
-        @if ($errors->any())
-            <div class="alert alert-danger bg-dark text-gold">
-                @foreach ($errors->all() as $error)
-                    <div>{{ $error }}</div>
-                @endforeach
-            </div>
-        @endif
-
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" class="form-control">
-            </div>
-
-            <div class="mb-3">
-                <label for="password" class="form-label">Пароль</label>
-                <input id="password" type="password" name="password" required autocomplete="current-password" class="form-control">
-            </div>
-
-            <div class="mb-3 form-check">
-                <input id="remember_me" type="checkbox" name="remember" class="form-check-input">
-                <label for="remember_me" class="form-check-label">Запомнить меня</label>
-            </div>
-
-            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-                @if (Route::has('password.request'))
-                    <a href="{{ route('password.request') }}" class="small">Забыли пароль?</a>
-                @endif
-                <button type="submit" class="btn btn-tea">Войти</button>
-            </div>
-
-            <div class="text-center mt-3">
-                <a href="{{ route('register') }}">Нет аккаунта? Зарегистрироваться</a>
-            </div>
-        </form>
+        {{ $slot }}
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

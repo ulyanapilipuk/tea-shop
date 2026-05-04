@@ -5,7 +5,6 @@
     <div class="container">
         <h1>🍃 Чайный путь</h1>
         <p class="lead">Изысканные сорта чая из Китая, Японии, Индии и Цейлона</p>
-        <div style="font-size: 2rem; letter-spacing: 8px;">茶</div>
     </div>
 </div>
 

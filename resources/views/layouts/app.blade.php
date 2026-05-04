@@ -63,9 +63,10 @@
             margin: 20px auto;
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
             border: 1px solid rgba(255,255,255,0.2);
+            overflow: visible !important; /* важно для выпадающего меню */
         }
 
-        /* Карточки товаров (уже полупрозрачные) */
+        /* Карточки товаров */
         .card-tea {
             background: var(--card-bg);
             backdrop-filter: blur(2px);
@@ -94,6 +95,7 @@
             height: 180px;
         }
 
+        /* КНОПКИ */
         .btn-tea {
             background-color: var(--accent-gold);
             border: none;
@@ -110,7 +112,22 @@
             transform: scale(1.02);
         }
 
-        /* Таблицы с прозрачностью */
+        .btn-outline-tea {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            border-radius: 30px;
+            padding: 5px 15px;
+            transition: 0.2s;
+        }
+
+        .btn-outline-tea:hover {
+            background: var(--accent-gold);
+            color: #1e2a1f;
+            border-color: var(--accent-gold);
+        }
+
+        /* Таблицы */
         .table-custom {
             background: rgba(44, 58, 43, 0.9);
             border-radius: 16px;
@@ -157,11 +174,13 @@
             border-color: var(--accent-gold);
         }
 
-        /* Навигация (хедер) – светлая для контраста */
+        /* Навигация (хедер) */
         .navbar-custom {
             background: rgba(30, 42, 31, 0.95);
             backdrop-filter: blur(4px);
             border-bottom: 2px solid var(--accent-gold);
+            position: relative;
+            z-index: 1050;
         }
         .navbar-custom .navbar-brand,
         .navbar-custom .nav-link {
@@ -173,6 +192,11 @@
         }
         .navbar-custom .dropdown-menu {
             background-color: #1e2a1f;
+            position: absolute;
+            top: 100%;
+            left: auto;
+            right: 0;
+            z-index: 1060 !important;
         }
         .navbar-custom .dropdown-item {
             color: white;
@@ -182,6 +206,7 @@
             color: #1e2a1f;
         }
 
+        /* Футер */
         .footer {
             background: var(--footer-bg);
             backdrop-filter: blur(4px);
@@ -191,7 +216,6 @@
             font-size: 0.9rem;
         }
 
-        /* Утилиты */
         .container {
             max-width: 1200px;
         }
@@ -221,7 +245,6 @@
                 </div>
             @endif
 
-            <!-- Полупрозрачный блок для основного контента -->
             <div class="glass-container">
                 @yield('content')
             </div>
